@@ -1,0 +1,33 @@
+[
+  'assert',
+  'buffer',
+  'child_process',
+  'cluster',
+  'crypto',
+  'dgram',
+  'dns',
+  'domain',
+  'events',
+  'fs',
+  'http',
+  'https',
+  'net',
+  'os',
+  'path',
+  'punycode',
+  'querystring',
+  'readline',
+  'repl',
+  'stream',
+  'string_decoder',
+  'tls',
+  'tty',
+  'url',
+  'util',
+  'v8',
+  'vm',
+  'zlib',
+  "electron"
+].map(package => {
+  define(package, [], function () { return nodeRequire(package); })
+});

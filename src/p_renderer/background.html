@@ -1,0 +1,9 @@
+<template>
+  <h1>Do some heavy work on a background process!</h1>
+  <ul>
+    <li repeat.for="process of processes">${process.id} - ${process.status}</li>
+  </ul>
+  <div class="button-bar">
+    <button class="btn btn-success" click.delegate="startJob()">Run!</button>
+  </div>
+</template>

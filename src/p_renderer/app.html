@@ -1,0 +1,17 @@
+<template>
+  <require from="../scss/global.css"></require>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <ul class="nav">
+      <li repeat.for="row of router.navigation" class="nav-item ${row.isActive ? 'active' : ''}">
+        <a href.bind="row.href" class="nav-link">${row.title}</a>
+      </li>
+    </ul>
+  </nav>
+
+  <loading-indicator loading.bind="router.isNavigating || api.isRequesting"></loading-indicator>
+
+  <div class="container-fluid">
+    <router-view class="col-md-8"></router-view>
+  </div>
+</template>

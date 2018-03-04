@@ -1,0 +1,216 @@
+{
+  "name": "aurelia-electron-app",
+  "type": "project:application",
+  "bundler": {
+    "id": "cli",
+    "displayName": "Aurelia-CLI"
+  },
+  "build": {
+    "targets": [
+      {
+        "id": "web",
+        "displayName": "Web",
+        "index": "index.html",
+        "baseDir": ".",
+        "output": "scripts"
+      }
+    ],
+    "options": {
+      "minify": "stage & prod",
+      "sourcemaps": "dev & stage"
+    },
+    "bundles": [
+      {
+        "name": "p_renderer-app-bundle.js",
+        "source": {
+          "include": [
+            "[**/src/p_renderer/**/*.js]",
+            "**/*.{css,html}"
+          ]
+        }
+      },
+      {
+        "name": "p_renderer-vendor-bundle.js",
+        "prepend": [
+          "node_modules/bluebird/js/browser/bluebird.core.js",
+          {
+            "path": "node_modules/aurelia-cli/lib/resources/scripts/configure-bluebird-no-long-stacktraces.js",
+            "env": "stage & prod"
+          },
+          {
+            "path": "node_modules/aurelia-cli/lib/resources/scripts/configure-bluebird.js",
+            "env": "dev"
+          },
+          "node_modules/requirejs/require.js",
+          "requirejs-node-fix.js"
+        ],
+        "dependencies": [
+          {
+            "name": "popper.js",
+            "path": "../node_modules/popper.js/dist/umd",
+            "main": "popper.min",
+            "exports": "Popper",
+            "env": "stage & prod"
+          },
+          {
+            "name": "popper.js",
+            "path": "../node_modules/popper.js/dist/umd",
+            "main": "popper",
+            "exports": "Popper",
+            "env": "dev"
+          },
+          {
+            "name": "jquery",
+            "path": "../node_modules/jquery/dist",
+            "main": "jquery.slim.min",
+            "exports": "$",
+            "env": "stage & prod"
+          },
+          {
+            "name": "jquery",
+            "path": "../node_modules/jquery/dist",
+            "main": "jquery.slim",
+            "exports": "$",
+            "env": "dev"
+          },
+          {
+            "name": "bootstrap",
+            "path": "../node_modules/bootstrap/dist",
+            "main": "js/bootstrap.min",
+            "env": "stage & prod",
+            "deps": [
+              "jquery",
+              "popper.js"
+            ]
+          },
+          {
+            "name": "bootstrap",
+            "path": "../node_modules/bootstrap/dist",
+            "main": "js/bootstrap",
+            "env": "dev",
+            "deps": [
+              "jquery",
+              "popper.js"
+            ]
+          },
+          {
+            "name": "nprogress",
+            "path": "../node_modules/nprogress",
+            "main": "nprogress",
+            "resources": [
+              "nprogress.css"
+            ]
+          },
+          "aurelia-binding",
+          "aurelia-bootstrapper",
+          "aurelia-dependency-injection",
+          "aurelia-event-aggregator",
+          "aurelia-framework",
+          "aurelia-history",
+          "aurelia-history-browser",
+          "aurelia-loader",
+          "aurelia-loader-default",
+          "aurelia-logging",
+          "aurelia-logging-console",
+          "aurelia-metadata",
+          "aurelia-pal",
+          "aurelia-pal-browser",
+          "aurelia-path",
+          "aurelia-polyfills",
+          "aurelia-route-recognizer",
+          "aurelia-router",
+          "aurelia-task-queue",
+          "aurelia-templating",
+          "aurelia-templating-binding",
+          {
+            "name": "aurelia-templating-resources",
+            "path": "../node_modules/aurelia-templating-resources/dist/amd",
+            "main": "aurelia-templating-resources"
+          },
+          {
+            "name": "aurelia-templating-router",
+            "path": "../node_modules/aurelia-templating-router/dist/amd",
+            "main": "aurelia-templating-router"
+          },
+          {
+            "name": "aurelia-testing",
+            "path": "../node_modules/aurelia-testing/dist/amd",
+            "main": "aurelia-testing",
+            "env": "dev"
+          },
+          "text"
+        ]
+      }
+    ],
+    "loader": {
+      "type": "require",
+      "configTarget": "p_renderer-vendor-bundle.js",
+      "includeBundleMetadataInConfig": "auto",
+      "plugins": [
+        {
+          "name": "text",
+          "extensions": [
+            ".html",
+            ".css"
+          ],
+          "stub": true
+        }
+      ],
+      "config": {},
+      "ignoreNodeBuiltinLibs": true,
+      "traceUnbundledFiles": true,
+      "externalModules": {
+        "electron": []
+      }
+    }
+  },
+  "platform": {
+    "id": "web",
+    "displayName": "Web",
+    "index": "index.html",
+    "baseDir": ".",
+    "output": "scripts"
+  },
+  "transpiler": {
+    "id": "typescript",
+    "displayName": "TypeScript",
+    "fileExtension": ".ts",
+    "dtsSource": [
+      "./custom_typings/**/*.d.ts"
+    ],
+    "source": "src/**/*.ts"
+  },
+  "markupProcessor": {
+    "id": "none",
+    "displayName": "None",
+    "fileExtension": ".html",
+    "source": "src/p_renderer/**/*.html"
+  },
+  "cssProcessor": {
+    "id": "sass",
+    "displayName": "Sass",
+    "fileExtension": ".scss",
+    "source": "src/**/*.scss"
+  },
+  "editor": {
+    "id": "vscode",
+    "displayName": "Visual Studio Code"
+  },
+  "unitTestRunner": {
+    "id": "karma",
+    "displayName": "Karma",
+    "source": "test/unit/**/*.ts"
+  },
+  "paths": {
+    "root": "src",
+    "resources": "p_renderer/resources",
+    "elements": "p_renderer/resources/elements",
+    "attributes": "p_renderer/resources/attributes",
+    "valueConverters": "p_renderer/resources/value-converters",
+    "bindingBehaviors": "p_renderer/resources/binding-behaviors"
+  },
+  "testFramework": {
+    "id": "jasmine",
+    "displayName": "Jasmine"
+  }
+}

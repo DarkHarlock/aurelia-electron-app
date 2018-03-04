@@ -1,0 +1,14 @@
+<template>
+  <h1>Nateve node.js modules are available!</h1>
+  <code>
+    <pre>
+  import * as fs from 'fs';
+  fs.readdir(".", (err, f) => {
+    this.files = f;
+  })</pre>
+  </code>
+  Electron root folder contains:
+  <ul>
+    <li repeat.for="file of files">${file}</li>
+  </ul>
+</template>
